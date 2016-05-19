@@ -6,22 +6,24 @@ struct BiTNode
 	char data;
 	struct BiTNode *lchild, *rchild;
 };
-void CreateBiTree(BiTNode *&BiTree, char ch)
+void CreateBiTree(BiTNode *&BiTree)
 {
-	while (ch != '@')
-	{
+	char ch;
+	cin >> ch;
 		if (ch == '#')
+		{
 			BiTree = NULL;
+			return;
+		}
 		else
 		{
-			
+			BiTree = new BiTNode;
 			BiTree->data = ch;
-			CreateBiTree(BiTree->lchild, ch);
-			CreateBiTree(BiTree->rchild, ch);
+			cout << "请继续输入" << endl;
+			CreateBiTree(BiTree->lchild);
+			cout << "请继续输入" << endl;
+			CreateBiTree(BiTree->rchild);
 		}
-		cout << "请继续输入" << endl;
-		cin >> ch;
-	}
 }
 
 int NodeCount(BiTNode *BiTree)
@@ -69,14 +71,16 @@ void PostOrderTraversal(BiTNode *BiTree)
 
 int main()
 {
-	BiTNode *BiTree = NULL;
-	char ch;
-	cin >> ch;
-	CreateBiTree(BiTree, ch);
+	BiTNode *BiTree = new BiTNode;
+	cout << "请输入字符" << "（可直接复制粘贴：A B C # # D E # G # # F # # #）" << endl;
+	CreateBiTree(BiTree);
 	cout << "二叉树的节点个数为" << NodeCount(BiTree) << endl;
-	cout << "二叉树的深度为" << Depth << endl;
+	cout << "二叉树的深度为" << Depth(BiTree) << endl;
+	cout << "中序遍历为：";
 	InOrderTraversal(BiTree);
+	cout << endl;
+	cout << "后序遍历为：";
 	PostOrderTraversal(BiTree);
-
+	cout << endl;
 	system("pause");
 }
