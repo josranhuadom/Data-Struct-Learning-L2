@@ -1,11 +1,14 @@
 #include<iostream>
 using namespace std;
 
+//二叉树的二叉链表存储表示
 struct BiTNode 
 {
 	char data;
 	struct BiTNode *lchild, *rchild;
 };
+
+//建立二叉树
 void CreateBiTree(BiTNode *&BiTree)
 {
 	char ch;
@@ -26,6 +29,7 @@ void CreateBiTree(BiTNode *&BiTree)
 		}
 }
 
+//计算结点个数
 int NodeCount(BiTNode *BiTree)
 {
 	if (BiTree == NULL)
@@ -34,14 +38,15 @@ int NodeCount(BiTNode *BiTree)
 		return NodeCount(BiTree->lchild) + NodeCount(BiTree->rchild) + 1;
 }
 
+//计算二叉树深度
 int Depth(BiTNode *BiTree)
 {
-	if (BiTree == NULL)
+	if (BiTree == NULL)                                  //如果为空树，深度为 0，递归结束
 		return 0;
 	else
 	{
-		int m = Depth(BiTree->lchild);
-		int n = Depth(BiTree->rchild);
+		int m = Depth(BiTree->lchild);          //递归计算左子树的深度记为 m
+		int n = Depth(BiTree->rchild);           //递归计算右子树的深度记为 n
 		if (m > n)
 			return (m + 1);
 		else
@@ -49,6 +54,7 @@ int Depth(BiTNode *BiTree)
 	}
 }
 
+//中序遍历
 void InOrderTraversal(BiTNode *BiTree)
 {
 	if (BiTree)
@@ -59,6 +65,7 @@ void InOrderTraversal(BiTNode *BiTree)
 	}
 }
 
+//后序遍历
 void PostOrderTraversal(BiTNode *BiTree)
 {
 	if (BiTree)
